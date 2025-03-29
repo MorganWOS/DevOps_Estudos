@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web:
+    image: python:alpine
+    ports:
+      - "50:50"
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
